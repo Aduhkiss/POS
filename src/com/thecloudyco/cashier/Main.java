@@ -19,6 +19,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		ConsoleUtil.Print(Config.WELCOME_MESSAGE_LINE_ONE, Config.WELCOME_MESSAGE_LINE_TWO);
+		System.out.println("\n");
 		
 		ModuleManager.registerModules();
 		ManagerAPI mAPI = new ManagerAPI();
@@ -33,15 +34,6 @@ public class Main {
 			//e1.printStackTrace();
 		}
 		
-//		Gson gson = new Gson();
-//		ItemManager.ItemList.add(new Item("Water Bottle", 2.46, "22222222"));
-//		ItemManager.ItemList.add(new Item("Beef", 56.54, "22222222"));
-//		ItemManager.ItemList.add(new Item("Steak", 3.65, "22222222"));
-//		
-//		System.out.println(gson.toJson(ItemManager.ItemList));
-		
-		//TODO: Setup how the config will work, and how it connects to the backend JSON server
-		
 		for(int i = 0; i < 3; i++) {
 			Scanner sc = new Scanner(System.in);
 			// Ask for input, then look for ITEMS or UPC's from the backend
@@ -53,8 +45,6 @@ public class Main {
 			CModule m = ModuleManager.getModule(origin[0]);
 			
 			if(m == null) {
-				//
-				
 				// Now run a UPC search
 				boolean found = false;
 				for(Item item : ItemManager.ItemList) {

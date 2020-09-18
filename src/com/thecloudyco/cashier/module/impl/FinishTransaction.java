@@ -23,6 +23,7 @@ public class FinishTransaction extends CModule {
 		
 		ConsoleUtil.Print("** THANK YOU **", "** COME AGAIN **");
 		//TODO: Print Recipt
+		//TODO: Clear the list of items that the customer is purchasing (or just completely reset it)
 		Register.access().setBalance(0.00);
 		return;
 	}

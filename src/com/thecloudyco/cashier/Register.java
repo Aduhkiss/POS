@@ -1,5 +1,7 @@
 package com.thecloudyco.cashier;
 
+import com.thecloudyco.cashier.util.StringUtil;
+
 public class Register {
 	public static Register me;
 	public static Register access() {
@@ -18,6 +20,10 @@ public class Register {
 	
 	public double getBalance() {
 		return BALANCE;
+	}
+	
+	public double getReadableBalance() {
+		return Double.valueOf(StringUtil.realBalance(String.valueOf(BALANCE)));
 	}
 	
 	public void removeBalance(double money) {

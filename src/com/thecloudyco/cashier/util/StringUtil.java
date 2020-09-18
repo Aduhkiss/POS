@@ -20,4 +20,12 @@ public class StringUtil {
         }
         return str.toString();
 	}
+	
+	public static String realBalance(String value) {
+		int v = value.indexOf(".");
+		if(value.substring(v, value.length()).length() > 2) {
+			return value.substring(0, v + 3);
+		}
+		return value;
+	}
 }

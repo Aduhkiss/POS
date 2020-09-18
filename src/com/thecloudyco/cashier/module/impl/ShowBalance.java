@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import com.thecloudyco.cashier.Register;
 import com.thecloudyco.cashier.module.CModule;
+import com.thecloudyco.cashier.util.StringUtil;
 
 public class ShowBalance extends CModule {
 	public ShowBalance() {
@@ -11,7 +12,7 @@ public class ShowBalance extends CModule {
 	
 	@Override
 	public void execute(String[] args, Scanner sc) {
-		double bal = Register.access().getBalance();
+		double bal = Register.access().getReadableBalance();
 		
 		if(bal > 0.00) {
 			System.out.println("REMAINING BALANCE: " + bal);

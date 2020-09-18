@@ -41,6 +41,12 @@ public class CashTender extends CModule {
 				ConsoleUtil.Print("ERROR", "Not Authorized");
 				return;
 			} else {
+				
+				if(tender < 0.00) {
+					ConsoleUtil.Print("ERROR", "Tender Amount must be positive number");
+					return;
+				}
+				
 				// TODO: Process and log the tender
 				Register.access().removeBalance(tender);
 				ConsoleUtil.Print("CASH TENDER PROCESSED", "$" + Register.access().getReadableBalance() + " REMAINING");
@@ -57,6 +63,12 @@ public class CashTender extends CModule {
 				}
 			}
 		} else {
+			
+			if(tender < 0.00) {
+				ConsoleUtil.Print("ERROR", "Tender Amount must be positive number");
+				return;
+			}
+			
 			// TODO: Process and log the tender
 			Register.access().removeBalance(tender);
 			ConsoleUtil.Print("CASH TENDER PROCESSED", "$" + Register.access().getReadableBalance() + " REMAINING");

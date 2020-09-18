@@ -1,5 +1,6 @@
 package com.thecloudyco.cashier;
 
+import com.thecloudyco.cashier.user.Operator;
 import com.thecloudyco.cashier.util.StringUtil;
 
 public class Register {
@@ -13,9 +14,9 @@ public class Register {
 	
 	// All the variables that we need to access in other parts of the program
 	private double BALANCE;
+	private Operator loggedInOperator;
 	
 	public Register() {
-		
 	}
 	
 	public double getBalance() {
@@ -36,5 +37,16 @@ public class Register {
 	
 	public void setBalance(double money) {
 		BALANCE = money;
+	}
+	
+	public boolean isLoggedIn() {
+		if(loggedInOperator != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Operator getLoggedIn() {
+		return loggedInOperator;
 	}
 }

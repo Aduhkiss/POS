@@ -34,8 +34,17 @@ public class Main {
 			//e1.printStackTrace();
 		}
 		
+		Scanner sc = new Scanner(System.in);
+		
+//		for(int a = 0; a < 3; a++) {
+//			// Check if the current register is logged in
+//			if(!Register.access().isLoggedIn()) {
+//				System.out.println("** CLOSED **");
+//				String open_id = sc.nextLine();
+//			}
+//		}
+		
 		for(int i = 0; i < 3; i++) {
-			Scanner sc = new Scanner(System.in);
 			// Ask for input, then look for ITEMS or UPC's from the backend
 			System.out.println("ENTER ITEM: ");
 			String input = sc.nextLine();

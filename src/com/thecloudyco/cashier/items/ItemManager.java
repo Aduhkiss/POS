@@ -17,4 +17,13 @@ public class ItemManager {
 		String json = HttpUtil.get(Config.UPC_DOWNLOAD_SERVER);
 		ItemList = gson.fromJson(json, new TypeToken<List<Item>>(){}.getType());
 	}
+	
+	public static Item getItemFromUPC(String UPC) {
+		for(Item item : ItemList) {
+			if(item.getUPC().equals(UPC)) {
+				return item;
+			}
+		}
+		return null;
+	}
 }

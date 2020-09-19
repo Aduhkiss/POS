@@ -15,7 +15,7 @@ public class ShowBalance extends CModule {
 		double bal = Register.access().getReadableBalance();
 		
 		if(bal > 0.00) {
-			System.out.println("REMAINING BALANCE: " + bal);
+			System.out.println("BALANCE: " + bal);
 		} else {
 			System.out.println("CHANGE: " + Math.abs(bal));
 		}

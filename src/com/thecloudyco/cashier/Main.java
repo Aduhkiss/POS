@@ -19,6 +19,8 @@ import com.thecloudyco.override.ent.ManagerProfile;
 public class Main {
 
 	public static void main(String[] args) {
+		ConsoleUtil.Clear();
+		
 		ModuleManager.registerModules();
 		ManagerAPI mAPI = new ManagerAPI();
 		Register r = Register.access();
@@ -89,9 +91,14 @@ public class Main {
 				for(Item item : ItemManager.ItemList) {
 					if(item.getUPC().equals(origin[0].toUpperCase())) {
 						
-						System.out.print(item.getName() + " = $" + item.getPrice());
+						System.out.print(item.getName() + " | $" + item.getPrice());
 						System.out.println("\n");
 						Register.access().addBalance(item.getPrice());
+						if(Register.access().getTransaction() == null) {
+							Register.access().createTransaction();
+							System.out.println("NEW TRANSACTION CREATED");
+						}
+						Register.access().getTransaction().addItem(item);
 						found = true;
 					}
 				}

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.thecloudyco.cashier.Register;
 import com.thecloudyco.cashier.module.CModule;
+import com.thecloudyco.cashier.transaction.Tender;
 import com.thecloudyco.cashier.util.ConsoleUtil;
 
 public class CustRelations extends CModule {
@@ -23,8 +24,9 @@ public class CustRelations extends CModule {
 			return;
 		}
 		
-		System.out.println("Done.");
+		System.out.println("CUSTOMER RELATIONS" + " | $-" + value);
 		Register.access().removeBalance(value);
+		Register.access().getTransaction().addTender(new Tender("CUSTOMER RELATIONS", (value * -1)));
 		return;
 	}
 	

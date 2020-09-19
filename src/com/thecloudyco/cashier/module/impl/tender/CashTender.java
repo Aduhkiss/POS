@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.thecloudyco.cashier.Register;
 import com.thecloudyco.cashier.module.CModule;
+import com.thecloudyco.cashier.transaction.Tender;
 import com.thecloudyco.cashier.util.ConsoleUtil;
 import com.thecloudyco.override.api.ManagerAPI;
 import com.thecloudyco.override.common.OverrideType;
@@ -49,8 +50,8 @@ public class CashTender extends CModule {
 				
 				// TODO: Process and log the tender
 				Register.access().removeBalance(tender);
-				ConsoleUtil.Print("CASH TENDER PROCESSED", "$" + Register.access().getReadableBalance() + " REMAINING");
-				
+				Register.access().getTransaction().addTender(new Tender("CASH TENDER", (tender * -1)));
+				ConsoleUtil.Print("CASH TENDER PROCESSED", "$" + Register.access().getReadableBalance() + " REMAINING");				
 				
 				if(Register.access().getBalance() <= 0) {
 					// Finish the transaction, and tell the cashier how much change to give the customer
@@ -72,6 +73,7 @@ public class CashTender extends CModule {
 			
 			// TODO: Process and log the tender
 			Register.access().removeBalance(tender);
+			Register.access().getTransaction().addTender(new Tender("CASH TENDER", (tender * -1)));
 			ConsoleUtil.Print("CASH TENDER PROCESSED", "$" + Register.access().getReadableBalance() + " REMAINING");
 			
 			

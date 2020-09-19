@@ -6,6 +6,8 @@ import java.util.Map;
 import com.thecloudyco.cashier.module.impl.CustRelations;
 import com.thecloudyco.cashier.module.impl.RefreshUPC;
 import com.thecloudyco.cashier.module.impl.ShowBalance;
+import com.thecloudyco.cashier.module.impl.ShowTransaction;
+import com.thecloudyco.cashier.module.impl.VoidItem;
 import com.thecloudyco.cashier.module.impl.VoidTotal;
 import com.thecloudyco.cashier.module.impl.tender.CashTender;
 import com.thecloudyco.cashier.module.impl.tender.ICMIRTender;
@@ -19,11 +21,13 @@ public class ModuleManager {
 		
 		// Numeric Modules
 		Modules.put("6667", new CustRelations());
-		Modules.put("4444", new ShowBalance());
+		Modules.put("", new ShowBalance());
+		Modules.put("1500", new ShowTransaction());
 		Modules.put("2001", new RefreshUPC());
 		
 		// uhh.. not numeric modules
 		Modules.put("VOIDTOTAL", new VoidTotal());
+		Modules.put("VOID", new VoidItem());
 		
 		// Tender Modules
 		Modules.put("CASH", new CashTender());

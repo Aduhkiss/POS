@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.thecloudyco.cashier.Register;
 import com.thecloudyco.cashier.module.CModule;
+import com.thecloudyco.cashier.transaction.Tender;
 import com.thecloudyco.cashier.util.ConsoleUtil;
 import com.thecloudyco.override.api.ManagerAPI;
 import com.thecloudyco.override.common.OverrideType;
@@ -35,12 +36,14 @@ public class ICMIRTender extends CModule {
 				return;
 			} else {
 				ConsoleUtil.Print("** THANK YOU **", "** FOR MAKING IT RIGHT **");
+				Register.access().getTransaction().addTender(new Tender("ICMIR Tender", (Register.access().getReadableBalance() * -1)));
 				Register.access().setBalance(0.00);
 				Register.access().voidTransaction();
 				return;
 			}
 		} else {
 			ConsoleUtil.Print("** THANK YOU **", "** FOR MAKING IT RIGHT **");
+			Register.access().getTransaction().addTender(new Tender("ICMIR Tender", (Register.access().getReadableBalance() * -1)));
 			Register.access().setBalance(0.00);
 			Register.access().voidTransaction();
 			return;

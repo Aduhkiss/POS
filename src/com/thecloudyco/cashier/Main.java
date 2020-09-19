@@ -70,7 +70,6 @@ public class Main {
 						
 					} else {
 						ConsoleUtil.Print("ERROR", "Check Password");
-						return;
 					}
 				}
 			}

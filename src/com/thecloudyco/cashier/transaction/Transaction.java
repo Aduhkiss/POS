@@ -1,5 +1,6 @@
 package com.thecloudyco.cashier.transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.thecloudyco.cashier.items.Item;
@@ -9,9 +10,9 @@ public class Transaction {
 	private Operator operator;
 	private List<Item> Items;
 	
-	public Transaction(Operator operator, List<Item> i) {
+	public Transaction(Operator operator) {
 		this.operator = operator;
-		this.Items = i;
+		this.Items = new ArrayList<>();
 	}
 
 	public Operator getOperator() {

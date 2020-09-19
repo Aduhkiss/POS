@@ -59,6 +59,7 @@ public class CashTender extends CModule {
 					//TODO: Print Recipt
 					//TODO: Clear the list of items that the customer is purchasing (or just completely reset it)
 					Register.access().setBalance(0.00);
+					Register.access().voidTransaction();
 					return;
 				}
 			}
@@ -81,6 +82,7 @@ public class CashTender extends CModule {
 				//TODO: Print Recipt
 				//TODO: Clear the list of items that the customer is purchasing (or just completely reset it)
 				Register.access().setBalance(0.00);
+				Register.access().voidTransaction();
 				return;
 			}
 		}

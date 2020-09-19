@@ -1,5 +1,6 @@
 package com.thecloudyco.cashier;
 
+import com.thecloudyco.cashier.transaction.Transaction;
 import com.thecloudyco.cashier.user.Operator;
 import com.thecloudyco.cashier.util.StringUtil;
 
@@ -15,8 +16,21 @@ public class Register {
 	// All the variables that we need to access in other parts of the program
 	private double BALANCE;
 	private Operator loggedInOperator;
+	private Transaction transaction;
 	
 	public Register() {
+	}
+	
+	public Transaction getTransaction() {
+		return transaction;
+	}
+	
+	public void createTransaction() {
+		transaction = new Transaction(loggedInOperator);
+	}
+	
+	public void voidTransaction() {
+		transaction = null;
 	}
 	
 	public double getBalance() {

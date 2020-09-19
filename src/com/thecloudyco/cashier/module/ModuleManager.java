@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.thecloudyco.cashier.module.impl.CustRelations;
-import com.thecloudyco.cashier.module.impl.FinishTransaction;
 import com.thecloudyco.cashier.module.impl.RefreshUPC;
 import com.thecloudyco.cashier.module.impl.ShowBalance;
 import com.thecloudyco.cashier.module.impl.VoidTotal;
 import com.thecloudyco.cashier.module.impl.tender.CashTender;
+import com.thecloudyco.cashier.module.impl.tender.ICMIRTender;
 
 public class ModuleManager {
 	private static Map<String, CModule> Modules = new HashMap<>();
@@ -20,7 +20,6 @@ public class ModuleManager {
 		// Numeric Modules
 		Modules.put("6667", new CustRelations());
 		Modules.put("4444", new ShowBalance());
-		Modules.put("1102", new FinishTransaction());
 		Modules.put("2001", new RefreshUPC());
 		
 		// uhh.. not numeric modules
@@ -28,6 +27,7 @@ public class ModuleManager {
 		
 		// Tender Modules
 		Modules.put("CASH", new CashTender());
+		Modules.put("ICANMAKEITRIGHT", new ICMIRTender());
 	}
 	
 	public static CModule getModule(String id) {

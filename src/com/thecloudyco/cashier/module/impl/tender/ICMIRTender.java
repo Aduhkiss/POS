@@ -1,4 +1,4 @@
-package com.thecloudyco.cashier.module.impl;
+package com.thecloudyco.cashier.module.impl.tender;
 
 import java.util.Scanner;
 
@@ -8,19 +8,21 @@ import com.thecloudyco.cashier.util.ConsoleUtil;
 import com.thecloudyco.override.api.ManagerAPI;
 import com.thecloudyco.override.common.OverrideType;
 
-public class VoidTotal extends CModule {
-	public VoidTotal() {
-		super("VOID TRANSACTION");
+public class ICMIRTender extends CModule {
+	
+	public ICMIRTender() {
+		super("I CAN MAKE IT RIGHT TENDER");
 	}
 
 	@Override
 	public void execute(String[] args, Scanner sc) {
-		double balance = Register.access().getBalance();
+		double bal = Register.access().getBalance();
 		
-		// If the balance is over $20, we require a manager override
-		if(balance >= 20.00) {
+		if(bal >= 20.00) {
+			// Require a managers override if the balance is bigger then $20.00
 			ConsoleUtil.Print("WARNING", "Requires MGR Override");
 			String override = sc.nextLine();
+			
 			ManagerAPI mAPI = new ManagerAPI();
 			
 			boolean flag = false;
@@ -32,18 +34,18 @@ public class VoidTotal extends CModule {
 				ConsoleUtil.Print("ERROR", "Not Authorized");
 				return;
 			} else {
-				ConsoleUtil.Print("** VOID TRANSACTION **", "** THANK YOU **");
+				ConsoleUtil.Print("** THANK YOU **", "** FOR MAKING IT RIGHT **");
 				Register.access().setBalance(0.00);
 				Register.access().voidTransaction();
 				return;
 			}
-			
 		} else {
-			ConsoleUtil.Print("** VOID TRANSACTION **", "** THANK YOU **");
+			ConsoleUtil.Print("** THANK YOU **", "** FOR MAKING IT RIGHT **");
 			Register.access().setBalance(0.00);
 			Register.access().voidTransaction();
 			return;
 		}
+				
 	}
 
 }

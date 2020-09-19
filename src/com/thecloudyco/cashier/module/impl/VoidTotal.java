@@ -25,7 +25,7 @@ public class VoidTotal extends CModule {
 			
 			boolean flag = false;
 			try {
-				flag = mAPI.isAuthorized(OverrideType.CASHIER, override);
+				flag = mAPI.isAuthorized(OverrideType.PIC, override);
 			} catch (Exception e) {}
 			
 			if(!flag) {

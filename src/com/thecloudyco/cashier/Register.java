@@ -39,6 +39,10 @@ public class Register {
 		BALANCE = money;
 	}
 	
+	public void setLoggedIn(Operator operator) {
+		loggedInOperator = operator;
+	}
+	
 	public boolean isLoggedIn() {
 		if(loggedInOperator != null) {
 			return true;

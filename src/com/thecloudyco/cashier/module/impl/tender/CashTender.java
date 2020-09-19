@@ -34,7 +34,7 @@ public class CashTender extends CModule {
 			String override = sc.nextLine();
 			
 			try {
-				flag = mAPI.isAuthorized(OverrideType.CASHIER, override);
+				flag = mAPI.isAuthorized(OverrideType.PIC, override);
 			} catch (Exception e) {}
 			
 			if(!flag) {

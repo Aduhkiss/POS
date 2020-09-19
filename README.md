@@ -22,5 +22,5 @@ This program uses The Cloudy Co. Supervisor Override API to check Manager overri
 Codes used to accept tender
 
 * CASH - Accept Cash Money
-* CHECK - Accept a check
+~~* CHECK - Accept a check~~ (Use CASH for Check tenders)
 * ICANMAKEITRIGHT - Used when giving items for free (Requires Manager Override if balance is larger then $20.00)

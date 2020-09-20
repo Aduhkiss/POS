@@ -66,7 +66,7 @@ public class Main {
 						Register.access().setLoggedIn(new Operator(profile.getFirstName(), profile.getLastName(), open_id));
 						
 						ConsoleUtil.Print(Config.WELCOME_MESSAGE_LINE_ONE, Config.WELCOME_MESSAGE_LINE_TWO);
-						System.out.println("** WELCOME " + profile.getFirstName().toUpperCase() + " **");
+						System.out.println("\n** WELCOME " + profile.getFirstName().toUpperCase() + " **");
 						
 					} else {
 						ConsoleUtil.Print("ERROR", "Check Password");
@@ -95,7 +95,6 @@ public class Main {
 						Register.access().addBalance(item.getPrice());
 						if(Register.access().getTransaction() == null) {
 							Register.access().createTransaction();
-							System.out.println("NEW TRANSACTION CREATED");
 						}
 						Register.access().getTransaction().addItem(item);
 						found = true;

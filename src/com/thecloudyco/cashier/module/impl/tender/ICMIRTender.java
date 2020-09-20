@@ -17,6 +17,13 @@ public class ICMIRTender extends CModule {
 
 	@Override
 	public void execute(String[] args, Scanner sc) {
+		
+		if(Register.access().getTransaction() != null) {
+		} else {
+			ConsoleUtil.Print("ERROR", "There is no active transaction");
+			return;
+		}
+		
 		double bal = Register.access().getBalance();
 		
 		if(bal >= 20.00) {

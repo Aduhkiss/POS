@@ -17,6 +17,13 @@ public class CashTender extends CModule {
 
 	@Override
 	public void execute(String[] args, Scanner sc) {
+		
+		if(Register.access().getTransaction() != null) {
+		} else {
+			ConsoleUtil.Print("ERROR", "There is no active transaction");
+			return;
+		}
+		
 		ConsoleUtil.Print("PLEASE ENTER", "CASH TENDER AMOUNT");
 		double tender = 0.00;
 		try {

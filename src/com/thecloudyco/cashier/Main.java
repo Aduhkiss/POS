@@ -11,6 +11,7 @@ import com.thecloudyco.cashier.module.CModule;
 import com.thecloudyco.cashier.module.ModuleManager;
 import com.thecloudyco.cashier.user.Operator;
 import com.thecloudyco.cashier.util.ConsoleUtil;
+import com.thecloudyco.cashier.util.LinuxUtil;
 import com.thecloudyco.cashier.util.StringUtil;
 import com.thecloudyco.override.api.ManagerAPI;
 import com.thecloudyco.override.common.OverrideType;
@@ -26,6 +27,11 @@ public class Main {
 		Register r = Register.access();
 		r.setBalance(0.00);
 		
+		//System.out.println(System.getProperty("os.name"));
+		if(System.getProperty("os.name").indexOf("Linux") >= 0) {
+			LinuxUtil.lockSystem();
+		}
+		
 		try {
 			ItemManager.downloadUPCs();
 		} catch (IOException e1) {
@@ -36,6 +42,70 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		
+		login(sc, mAPI);
+		
+		for(int i = 0; i < 3; i++) {
+			// Always check to make sure you are logged in
+			if(!Register.access().isLoggedIn()) {
+				login(sc, mAPI);
+			} else {
+				// Ask for input, then look for ITEMS or UPC's from the backend
+				System.out.println("ENTER ITEM: ");
+				String input = sc.nextLine();
+				String[] origin = StringUtil.toArray(input);
+				String[] arg = Arrays.copyOfRange(origin, 1, origin.length);
+				
+				CModule m = ModuleManager.getModule(origin[0].toUpperCase());
+				
+				if(m == null) {
+					// Now run a UPC search
+					boolean found = false;
+					for(Item item : ItemManager.ItemList) {
+						if(item.getUPC().equals(origin[0].toUpperCase())) {
+							
+							System.out.print(item.getName() + " | $" + item.getPrice());
+							System.out.println("\n");
+							Register.access().addBalance(item.getPrice());
+							if(Register.access().getTransaction() == null) {
+								Register.access().createTransaction();
+							}
+							Register.access().getTransaction().addItem(item);
+							found = true;
+						}
+					}
+					
+					if(!found) {
+						ConsoleUtil.Print("ITEM NOT FOUND", origin[0].toUpperCase());
+					}
+					
+				} else {
+					if(m.requiresMgrOverride()) {
+						ConsoleUtil.Print("WARNING", "Requires MGR Override");
+						String override = sc.nextLine();
+						
+						// Then check the override that was scanned
+						boolean flag = false;
+						try {
+							flag = mAPI.isAuthorized(OverrideType.PIC, override);
+						} catch (Exception e) {}
+						
+						if(!flag) {
+							ConsoleUtil.Print("ERROR", "Not Authorized");
+						} else {
+							m.execute(arg, sc);
+						}
+					} else {
+						m.execute(arg, sc);
+					}
+				}
+				
+				// To reset the variable so the for statement literally never ends LOL
+				i = 0;
+			}
+		}
+	}
+	
+	public static void login(Scanner sc, ManagerAPI mAPI) {
 		for(int a = 0; a < 3; a++) {
 			// Check if the current register is logged in
 			if(!Register.access().isLoggedIn()) {
@@ -73,61 +143,6 @@ public class Main {
 					}
 				}
 			}
-		}
-		
-		for(int i = 0; i < 3; i++) {
-			// Ask for input, then look for ITEMS or UPC's from the backend
-			System.out.println("ENTER ITEM: ");
-			String input = sc.nextLine();
-			String[] origin = StringUtil.toArray(input);
-			String[] arg = Arrays.copyOfRange(origin, 1, origin.length);
-			
-			CModule m = ModuleManager.getModule(origin[0].toUpperCase());
-			
-			if(m == null) {
-				// Now run a UPC search
-				boolean found = false;
-				for(Item item : ItemManager.ItemList) {
-					if(item.getUPC().equals(origin[0].toUpperCase())) {
-						
-						System.out.print(item.getName() + " | $" + item.getPrice());
-						System.out.println("\n");
-						Register.access().addBalance(item.getPrice());
-						if(Register.access().getTransaction() == null) {
-							Register.access().createTransaction();
-						}
-						Register.access().getTransaction().addItem(item);
-						found = true;
-					}
-				}
-				
-				if(!found) {
-					ConsoleUtil.Print("ITEM NOT FOUND", origin[0].toUpperCase());
-				}
-				
-			} else {
-				if(m.requiresMgrOverride()) {
-					ConsoleUtil.Print("WARNING", "Requires MGR Override");
-					String override = sc.nextLine();
-					
-					// Then check the override that was scanned
-					boolean flag = false;
-					try {
-						flag = mAPI.isAuthorized(OverrideType.PIC, override);
-					} catch (Exception e) {}
-					
-					if(!flag) {
-						ConsoleUtil.Print("ERROR", "Not Authorized");
-					} else {
-						m.execute(arg, sc);
-					}
-				} else {
-					m.execute(arg, sc);
-				}
-			}
-			
-			// To reset the variable so the for statement literally never ends LOL
-			i = 0;
 		}
 	}
 

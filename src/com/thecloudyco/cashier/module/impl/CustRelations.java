@@ -26,7 +26,9 @@ public class CustRelations extends CModule {
 		
 		System.out.println("CUSTOMER RELATIONS" + " | $-" + value);
 		Register.access().removeBalance(value);
-		Register.access().getTransaction().addTender(new Tender("CUSTOMER RELATIONS", (value * -1)));
+		if(Register.access().getTransaction() != null) {
+			Register.access().getTransaction().addTender(new Tender("CUSTOMER RELATIONS", (value * -1)));
+		}
 		return;
 	}
 	

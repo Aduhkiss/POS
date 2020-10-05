@@ -7,6 +7,7 @@ import com.thecloudyco.cashier.module.impl.CustRelations;
 import com.thecloudyco.cashier.module.impl.RefreshUPC;
 import com.thecloudyco.cashier.module.impl.ShowBalance;
 import com.thecloudyco.cashier.module.impl.ShowTransaction;
+import com.thecloudyco.cashier.module.impl.Signout;
 import com.thecloudyco.cashier.module.impl.VoidItem;
 import com.thecloudyco.cashier.module.impl.VoidTotal;
 import com.thecloudyco.cashier.module.impl.tender.CashTender;
@@ -28,10 +29,12 @@ public class ModuleManager {
 		// uhh.. not numeric modules
 		Modules.put("VOIDTOTAL", new VoidTotal());
 		Modules.put("VOID", new VoidItem());
+		Modules.put("SIGNOUT", new Signout());
 		
 		// Tender Modules
 		Modules.put("CASH", new CashTender());
 		Modules.put("ICANMAKEITRIGHT", new ICMIRTender());
+		
 	}
 	
 	public static CModule getModule(String id) {

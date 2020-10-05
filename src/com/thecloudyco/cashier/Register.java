@@ -15,7 +15,7 @@ public class Register {
 	
 	// All the variables that we need to access in other parts of the program
 	private double BALANCE;
-	private Operator loggedInOperator;
+	public Operator loggedInOperator;
 	private Transaction transaction;
 	
 	public Register() {

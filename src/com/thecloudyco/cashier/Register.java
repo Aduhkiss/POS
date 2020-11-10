@@ -49,6 +49,10 @@ public class Register {
 		BALANCE = BALANCE + money;
 	}
 	
+	public void addBalance(String money) {
+		BALANCE = BALANCE + Double.valueOf(money);
+	}
+	
 	public void setBalance(double money) {
 		BALANCE = money;
 	}

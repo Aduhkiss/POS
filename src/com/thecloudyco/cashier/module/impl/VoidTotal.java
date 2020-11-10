@@ -1,10 +1,12 @@
 package com.thecloudyco.cashier.module.impl;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import com.thecloudyco.cashier.Register;
 import com.thecloudyco.cashier.module.CModule;
 import com.thecloudyco.cashier.util.ConsoleUtil;
+import com.thecloudyco.cashier.util.QuickMessage;
 import com.thecloudyco.override.api.ManagerAPI;
 import com.thecloudyco.override.common.OverrideType;
 
@@ -17,9 +19,9 @@ public class VoidTotal extends CModule {
 	public void execute(String[] args, Scanner sc) {
 		double balance = Register.access().getBalance();
 		
-		// If the balance is over $20, we require a manager override
-		if(balance >= 20.00) {
-			ConsoleUtil.Print("WARNING", "Requires MGR Override");
+		// If the balance is over $40, we require a manager override
+		if(balance >= 40.00) {
+			QuickMessage.mgrOverride();
 			String override = sc.nextLine();
 			ManagerAPI mAPI = new ManagerAPI();
 			
@@ -33,7 +35,7 @@ public class VoidTotal extends CModule {
 				return;
 			} else {
 				ConsoleUtil.Print("** VOID TRANSACTION **", "** THANK YOU **");
-				Register.access().setBalance(0.00);
+				Register.access().getTransaction().finish(false);
 				Register.access().voidTransaction();
 				return;
 			}
@@ -41,6 +43,7 @@ public class VoidTotal extends CModule {
 		} else {
 			ConsoleUtil.Print("** VOID TRANSACTION **", "** THANK YOU **");
 			Register.access().setBalance(0.00);
+			Register.access().getTransaction().finish(false);
 			Register.access().voidTransaction();
 			return;
 		}

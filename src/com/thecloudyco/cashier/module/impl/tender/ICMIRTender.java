@@ -1,11 +1,13 @@
 package com.thecloudyco.cashier.module.impl.tender;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import com.thecloudyco.cashier.Register;
 import com.thecloudyco.cashier.module.CModule;
 import com.thecloudyco.cashier.transaction.Tender;
 import com.thecloudyco.cashier.util.ConsoleUtil;
+import com.thecloudyco.cashier.util.QuickMessage;
 import com.thecloudyco.override.api.ManagerAPI;
 import com.thecloudyco.override.common.OverrideType;
 
@@ -26,9 +28,9 @@ public class ICMIRTender extends CModule {
 		
 		double bal = Register.access().getBalance();
 		
-		if(bal >= 20.00) {
+		if(bal >= 10.00) {
 			// Require a managers override if the balance is bigger then $20.00
-			ConsoleUtil.Print("WARNING", "Requires MGR Override");
+			QuickMessage.mgrOverride();
 			String override = sc.nextLine();
 			
 			ManagerAPI mAPI = new ManagerAPI();
@@ -45,6 +47,7 @@ public class ICMIRTender extends CModule {
 				ConsoleUtil.Print("** THANK YOU **", "** FOR MAKING IT RIGHT **");
 				Register.access().getTransaction().addTender(new Tender("ICMIR Tender", (Register.access().getReadableBalance() * -1)));
 				Register.access().setBalance(0.00);
+				Register.access().getTransaction().finish(true);
 				Register.access().voidTransaction();
 				return;
 			}
@@ -52,6 +55,7 @@ public class ICMIRTender extends CModule {
 			ConsoleUtil.Print("** THANK YOU **", "** FOR MAKING IT RIGHT **");
 			Register.access().getTransaction().addTender(new Tender("ICMIR Tender", (Register.access().getReadableBalance() * -1)));
 			Register.access().setBalance(0.00);
+			Register.access().getTransaction().finish(true);
 			Register.access().voidTransaction();
 			return;
 		}

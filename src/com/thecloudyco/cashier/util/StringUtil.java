@@ -28,4 +28,13 @@ public class StringUtil {
 		}
 		return value;
 	}
+	
+	public static String realBalance(double value) {
+		String valuee = String.valueOf(value);
+		int v = valuee.indexOf(".");
+		if(valuee.substring(v, valuee.length()).length() > 2) {
+			return valuee.substring(0, v + 3);
+		}
+		return valuee;
+	}
 }

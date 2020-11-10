@@ -1,11 +1,13 @@
 package com.thecloudyco.cashier.module.impl.tender;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import com.thecloudyco.cashier.Register;
 import com.thecloudyco.cashier.module.CModule;
 import com.thecloudyco.cashier.transaction.Tender;
 import com.thecloudyco.cashier.util.ConsoleUtil;
+import com.thecloudyco.cashier.util.QuickMessage;
 import com.thecloudyco.override.api.ManagerAPI;
 import com.thecloudyco.override.common.OverrideType;
 
@@ -38,7 +40,7 @@ public class CashTender extends CModule {
 		if(tender >= 120.00) {
 			boolean flag = false;
 			
-			ConsoleUtil.Print("WARNING", "Requires MGR Override");
+			QuickMessage.mgrOverride();
 			String override = sc.nextLine();
 			
 			try {
@@ -67,6 +69,7 @@ public class CashTender extends CModule {
 					//TODO: Print Recipt
 					//TODO: Clear the list of items that the customer is purchasing (or just completely reset it)
 					Register.access().setBalance(0.00);
+					Register.access().getTransaction().finish(true);
 					Register.access().voidTransaction();
 					return;
 				}
@@ -91,7 +94,9 @@ public class CashTender extends CModule {
 				//TODO: Print Recipt
 				//TODO: Clear the list of items that the customer is purchasing (or just completely reset it)
 				Register.access().setBalance(0.00);
+				Register.access().getTransaction().finish(true);
 				Register.access().voidTransaction();
+				
 				return;
 			}
 		}

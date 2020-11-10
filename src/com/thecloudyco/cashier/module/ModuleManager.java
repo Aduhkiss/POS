@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.thecloudyco.cashier.module.impl.CustRelations;
-import com.thecloudyco.cashier.module.impl.RefreshUPC;
+import com.thecloudyco.cashier.module.impl.OpenGUI;
 import com.thecloudyco.cashier.module.impl.ShowBalance;
 import com.thecloudyco.cashier.module.impl.ShowTransaction;
 import com.thecloudyco.cashier.module.impl.Signout;
@@ -24,7 +24,7 @@ public class ModuleManager {
 		Modules.put("6667", new CustRelations());
 		Modules.put("", new ShowBalance());
 		Modules.put("1500", new ShowTransaction());
-		Modules.put("2001", new RefreshUPC());
+		Modules.put("0001", new OpenGUI());
 		
 		// uhh.. not numeric modules
 		Modules.put("VOIDTOTAL", new VoidTotal());

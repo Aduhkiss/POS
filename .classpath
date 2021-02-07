@@ -8,6 +8,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/13607/Documents/Libraries/gson-2.8.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/13607/Downloads/barbecue-1.5-beta1.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/CloudyCoOverrideWrapper"/>
+	<classpathentry kind="lib" path="C:/Users/13607/Downloads/jackson-databind-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/13607/Downloads/jackson-core-2.1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
